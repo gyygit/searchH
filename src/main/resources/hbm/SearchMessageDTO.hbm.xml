@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.sinovatech.search.entity.SearchMessageDTO"  table="SEARCH_MESSAGE" >
+ <comment>推送信息表</comment>
+  <id name="id"  type="java.lang.String" >
+  <column  name="ID"  length="32"  />
+  <generator class="uuid.hex" />
+ </id>
+    <property  name="appcode"  type="java.lang.String" >
+     <column  name="APPCODE"  length="32" >
+         <comment>注册应用编码</comment>
+     </column>
+   </property>
+    <property  name="commandcode"  type="java.lang.String" >
+     <column  name="COMMANDCODE"  length="100" >
+         <comment>业务数据分类编码</comment>
+     </column>
+   </property>
+   <!-- oracle9i  配合驱动oracle14
+    <property  name="fileinfo"  type="org.springframework.orm.hibernate3.support.ClobStringType">
+     <column  name="FILEINFO"  >
+         <comment>相关数据</comment>
+     </column>
+   </property> -->
+   <property  name="fileinfo"  type="text">
+     <column  name="FILEINFO"  >
+         <comment>相关数据</comment>
+     </column>
+   </property>
+    <property  name="opt"  type="java.lang.String" >
+     <column  name="OPT"  length="2" >
+         <comment>操作编码</comment>
+     </column>
+   </property>
+  </class>
+</hibernate-mapping>

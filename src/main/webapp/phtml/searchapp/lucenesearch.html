@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/mianBox.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/pagination.css" />
+<script src="../common/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="../common/js/jquery-jtemplates.js"></script>
+<script src="../common/js/title.js" type="text/javascript"></script>
+<script src="../common/js/public.js" type="text/javascript"></script>
+<script src="../common/js/commonBase.js" type="text/javascript"></script>
+<script src="../js/lucenesearch.js" type="text/javascript"></script>
+<script src="../common/js/jquery.pagination.js" type="text/javascript"></script>
+<script src="../common/js/splitPage.js" type="text/javascript"></script>
+<script src="../common/js/ajaxSetupSet.js" type="text/javascript"></script>
+</head>
+<body class="bg_cff">
+<div id="result"></div>
+<textarea id="templateContainer" style="display: none;">
+<div class="leftDiv" id="leftDiv">
+<!--  
+	<ul class="leftUl">
+  		<li>
+  			<a href= "/searchH/phtml/searchapp/searchapplb.html" >应用业务管理</a>
+  		</li>
+  		<li>
+  			<a href="/searchH/phtml/searchapp/searchkeyworldlog.html" >搜索日志 </a>
+  		</li>
+  		<li>
+            <a href="/searchH/phtml/searchapp/logmanagement/clickvisitlog.html" >点击日志 </a>
+       </li>
+  		<li>
+			<a href="/searchH/phtml/searchapp/dictionaryindexlb.html" >数据字典</a>
+  		</li>
+  		<li>
+             <a href="/searchH/phtml/searchapp/userlb.html" >用户管理</a>
+        </li>
+		<li>
+            <a href="/searchH/phtml/searchapp/synonymword/synonymwordmanage.html" >同义词管理</a>
+        </li>
+        <li>
+            <a href="/searchH/phtml/searchapp/recommendlb.html" >推荐管理</a>
+        </li>
+   	</ul>
+ 	-->
+</div>
+<div class="mainBox">
+<div class="route"><span>应用业务</span>&nbsp;&gt;&nbsp;<span>应用业务管理</span></div>
+ 	<table width="100%" id="searchTable" border="0" cellspacing="0" cellpadding="0" class="tb_searchbox mt20 bord_gray">
+      	<tr>
+      		<th>查询字段</th>
+      		<th>查询值</th>
+      		<th>查询条件</th>
+      		<th><input type="hidden" id="hidden_appId" value="{$T.appid}" />
+      		</th>
+      	</tr>
+      	{#if $T.m.fileds[0]!= null}
+      		{#foreach $T.m.fileds as filed}
+      			<tr>
+					<td style="text-align:center">
+						<div id="indexDemo" name="indexDemo">
+							<select name="tab_fileds" id="tab_fileds">
+									<option value="">请选择</option>
+			      				{#foreach $T.m.names as row1}
+				        			<option value="{$T.row1}" {#if $T.row1 == $T.filed }selected {#/if} >{$T.row1}</option>
+				       	 		{#/foreach}
+							</select >
+						</div>
+					</td>
+      				<td style="text-align:center">
+      					<input type="text" id="tab_querys" name="tab_querys" value="{$T.m.querys[$T.filed$index]}" />
+      				</td>
+      				<td style="text-align:center">
+      					<select name="tab_conditions" id="tab_conditions" >
+		      				<option value="1" {#if $T.m.conditions[$T.filed$index] == 1}selected {#/if}>等于</option>
+		      				<option value="2" {#if $T.m.conditions[$T.filed$index] == 2}selected {#/if}>LIKE</option>
+		      				<option value="3" {#if $T.m.conditions[$T.filed$index] == 3}selected {#/if}>大于</option>
+		      				<option value="4" {#if $T.m.conditions[$T.filed$index] == 4}selected {#/if}>小于</option>
+		      				<option value="5" {#if $T.m.conditions[$T.filed$index] == 5}selected {#/if}>分词LIKE</option> 
+      					</select> 
+      				</td>
+      				<td style="text-align:center">
+      					<select name="tab_logic" id="tab_logic">
+		      				<option value="1" {#if $T.m.logic[$T.filed$index] == 1}selected {#/if}>AND</option>
+		      				<option value="2" {#if $T.m.logic[$T.filed$index] == 2}selected {#/if}>OR</option>
+		      			</select>
+      				</td>
+      				<td >
+			      		<img id="addBtn" name="addBtn" src="../common/images/add.jpg" style="cursor: pointer;" onclick="luceneSearch.addRow('add')" class="ml10" />
+			      		<img id="delBtn" name="delBtn" src="../common/images/remove.jpg" style="cursor: pointer;"	 onclick="luceneSearch.addRow('del',this)" class="ml10" />
+		      		</td>
+      			</tr>
+      		{#/foreach}
+      	{#else}
+      	<tr>
+      		<td style="text-align:center">
+      			<div id="indexDemo" name="indexDemo">
+	      			<select name="tab_fileds" id="tab_fileds" >
+	      				<option value="">请选择</option>
+	      				{#foreach $T.m.names as row1}
+		        			<option value="{$T.row1}">{$T.row1}</option>
+		       	 		{#/foreach}
+	      			</select>
+	      		</div>
+      		</td>
+      		<td style="text-align:center">
+      			<input type="text" id="tab_querys" name="tab_querys" />
+      		</td>
+      		<td style="text-align:center">
+      			<select name="tab_conditions" id="tab_conditions">
+      				<option value="1">等于</option>
+      				<option value="2">LIKE</option>
+      				<option value="3">大于</option>
+      				<option value="4">小于</option>
+      				<option value="5">分词LIKE</option>
+      			</select>
+      		</td>
+      		<td style="text-align:center">
+      			<select name="tab_logic" id="tab_logic">
+      				<option value="1">AND</option>
+      				<option value="2">OR</option>
+      			</select>
+      		</td>
+      		
+      		<td >
+	      		<img id="addBtn" name="addBtn" src="../common/images/add.jpg" style="cursor: pointer;" onclick="luceneSearch.addRow('add')" class="ml10" />
+	      		<img id="delBtn" name="delBtn" src="../common/images/remove.jpg" style="cursor: pointer;"	 onclick="luceneSearch.addRow('del',this)" class="ml10" />
+      		</td>
+      	</tr>
+      	{#/if}
+    </table>
+    <div class="text_r mt10"> 
+    	<a href="javascript:;" onClick="$('#pageNo').val('1');luceneSearch.query();" class="bt_blue"><span>查询</span></a>&nbsp;&nbsp;&nbsp;
+    	<a href="javascript:back()" class="bt_blue"><span>返回</span></a>
+    </div>
+  	 <input type="hidden" id="tab_commandCode" name="tab_commandCode" value="{$T.m.commandCode}"/>
+	    <input type="hidden" id="tab_appCode" name="tab_appCode" value="{$T.m.appCode}"/>
+  	<table width="100%" style="border:1px solid #e3e3e3;" id="" class="tb_content1">
+	      <tr>
+	        {#foreach $T.m.names as row}
+	        	<td>
+	        		{$T.row}
+	        	</td>
+	        {#/foreach}
+	      </tr>
+	      <tr>
+	        {#foreach $T.m.values as row}
+	        	{#if $T.row == "table_tr"}
+	        		</tr><tr>
+	        	{#else}
+	        	<td>
+	        		{$T.row}
+	        	</td>
+	        	{#/if}
+	        {#/foreach}
+	      </tr>
+	      </table>
+</div>
+<div id="nextPage" style="display: none"></div>
+<input type="hidden" id="pageNo" value="1" />
+<input type="hidden" id="flag"/>
+</textarea>
+</body>
+<!-- 分页处理开始 -->
+<div id="Pagination">
+</div>
+<script type="text/javascript">
+function back(){
+	location.href="/searchH/phtml/searchapp/searchcommandlb.html?app_id="+document.getElementById('hidden_appId').value;
+}
+</script>
+
+</html>

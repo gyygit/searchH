@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style=" overflow-x:auto; overflow-y:auto;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="stylesheet" type="text/css" href="common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="common/css/home.css"/>
+<script src="common/js/title.js" type="text/javascript"></script>
+<script src="common/js/jquery-1.7.2.min.js"></script>
+<script src="common/js/public.js" type="text/javascript"></script>
+<script src="common/js/des1.js" type="text/javascript"></script>
+<script src="js/login.js" type="text/javascript"></script>
+</head>
+<body style="background:#269fd4">
+<form id="loginForm" class="loginBg">
+	<div class="loginBox">
+    	<div class="login">
+        <div class="loginTable" onkeydown="enterIn(event)">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+              	<td align="right" width="90">登录名：</td>
+                <td><span class="lgntext"><input type="text"id="code" name="code" /></span></td>
+              </tr>
+              <tr>
+              	<td align="right">密　码：</td>
+                <td><span class="lgntext"><input type="password" autocomplete="off" id="password" name="password"/>
+               			 </span>
+                </td>
+              </tr>
+              <tr>
+              <td align="right">&nbsp;</td>
+                <td><a href="javascript:;" id="submit" class="loginBtn font18 mr20 btn_href">登录</a>
+                <a href="javascript:;" id="reset" class="resetBtn font18 btn_href">重置</a></td>
+              </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+</form>
+<!--弹出层 开始-->
+<div class="cover" id="cover"></div>
+<!--保存成功 开始-->
+<div class="pop" id="bccg" style=" width:300px;">
+	<div class="popTitle"><a href="javascript:;" id="closeUrl" class="close fr btn_href" onclick="hide('cover','bccg')"></a><strong class="font14 fl">提示</strong><div class="clear"></div></div>
+	<div class="mt25 mb25">
+    	<p class="text_c" id="message">保存成功！</p>
+    </div>
+	<div class="text_c mt10 mb10"><a href="javascript:;" class="mr10 bt_blue btn_href" onclick="hide('cover','bccg')" id="goUrl"><span>确定</span></a></div>
+</div>
+<!--保存成功 结束-->
+</body>
+</html>

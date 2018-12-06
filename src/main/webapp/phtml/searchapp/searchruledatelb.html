@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/mianBox.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/pagination.css" />
+<script src="../common/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="../common/js/jquery-jtemplates.js"></script>
+<!--<script src="../common/js/jquery.simplemodal.1.4.3.min.js"></script>
+--><script src="../common/js/title.js" type="text/javascript"></script>
+<script src="../common/js/public.js" type="text/javascript"></script>
+<script src="../common/js/commonBase.js" type="text/javascript"></script>
+<script src="../js/searchruledatelist.js" type="text/javascript"></script>
+<script src="../common/js/jquery.pagination.js" type="text/javascript"></script>
+<script src="../common/js/splitPage.js" type="text/javascript"></script>
+<script src="../common/js/ajaxSetupSet.js" type="text/javascript"></script>
+</head>
+<body class="bg_cff">
+<div class="leftDiv" id="leftDiv">
+</div>
+<div class="mainBox">
+<div class="route"><span>应用业务</span>&nbsp;&gt;&nbsp;<span>索引数据配置</span></div>
+
+	 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb_searchbox mt20 bord_gray">
+      <tr>
+        <td align="right">业务数据分类编码：&nbsp;</td>
+        <td><input name="tab_commandCode" id="tab_commandCode" type="text" class="input_normal w160"/></td>
+        <td align="right">字段名称：&nbsp;</td>
+        <td><input name="tab_fieldName" id="tab_fieldName" type="text" class="input_normal w160"/></td>
+        
+       
+        <td align="right">字段索引类型：&nbsp;</td>
+        <td>
+        	<select name="tab_fieldIndexType" id="tab_fieldIndexType">
+        		<option VALUE="">全部</option>
+        		<option VALUE="1" >不索引</option>
+        		<option VALUE="2" >不分词索引</option>
+        		<option VALUE="3" >分词索引</option>
+        	</select>
+        </td>
+        <td align="right">字段值是否存储：&nbsp;</td>
+        <td>
+        	<select name="tab_fieldStoreType" id="tab_fieldStoreType">
+        		<option VALUE="">全部</option>
+        		<option VALUE="1" >存储</option>
+        		<option VALUE="2" >不存储</option>
+        	</select> 
+        </td>
+        <td align="right">是否智能提示：&nbsp;</td>
+        	 <td>
+        		 <select name="tab_isIntelliSense" id="tab_isIntelliSense">
+        		<option VALUE="">全部</option>
+        		<option VALUE="1" >是</option>
+        		<option VALUE="2" >否</option>
+        	</select>
+        	</td>
+      </tr>
+      <tr>
+       <td colspan="10" align="right"><p class="mr20"><a href="javascript:;" onClick="QueryMain.cleanSearch()"; class="bt_blue"><span>清空</span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" onClick="$('#pageNo').val('1');searchRuleDateList.queryList();"; class="bt_blue"><span>查询</span></a>&nbsp;&nbsp;&nbsp;<a href="/searchH/phtml/searchapp/searchapplb.html" class="mr10 bt_blue"><span>返回应用业务管理</span></a></p></td>
+      </tr>
+    </table>
+    
+    <p class="overflow text_r mt20">
+    	<!-- <a href="javascript:searchRuleDateList.updateSearchRule()" class="bt_blue ml10"><span>更新索引数据配置</span></a> -->
+	    <a href="javascript:add();" class="bt_blue ml10"><span>新增索引数据配置</span></a>
+	    <a href="javascript:;" class="bt_blue ml10" onclick="QueryMain.btn_delete_click('/searchRuleDate/deleteSearchRuleDate.wap')"><span>批量删除</span></a>
+    </p>
+  	<table width="100%" style="border:1px solid #e3e3e3;" id="result" class="tb_content1"></table>
+    <textarea id="templateContainer" style="display: none;"> 
+      <tbody>
+	      <tr class="aaaa" align="center">
+	        <th width="30"><input type="checkbox" class="checkedAll" onclick="QueryMain.checkAll();"name="items1" /></th> 
+	        <th>业务应用编码<input type="hidden" id="hidden_appId" value="{$T.app_id}" /></th> 
+	        <th>字段名称</th>
+	        <th>是否主键/数据类型</th>
+	        <th>字段索引类型</th>
+	        <th>字段值是否存储</th>
+	        <th>业务数据分类编码类型编码</th>
+	        <th>是否智能提示</th>
+	        <th>注册时间</th>
+	        <th>修改时间</th>
+	        <th>操作人</th>
+	        <th>操作</th>
+	      
+	      </tr> 
+      {#foreach $T.list as row}
+	      <tr class="aaaa" align="center">
+	        <td><input type="checkbox" name="items" value="{$T.row.id}" onclick="QueryMain.checkPart();"/></td> 
+	        <td>{$T.row.appCode}</td>
+	        <td>{$T.row.fieldName}</td>
+	        <td>
+			{#if $T.row.fileldDateType ==4}				        
+	        	主键/String类型
+	        {#elseif $T.row.fileldDateType == 1}
+	        	非主键/String类型
+	        {#else}	
+	        	非主键/int类型
+	        {#/if}
+	        </td>
+	        <td>
+	        {#if $T.row.fieldIndexType == 1}
+	        	不索引
+	        {#elseif $T.row.fieldIndexType == 2}
+	        	不分词索引
+	        {#else}
+	        	分词索引
+	        {#/if}
+	        </td>
+	        <td>{$T.row.fieldStoreType == 1 ? '存储':'不存储'}</td>
+	        <td>{$T.row.commandCode}--{$T.row.commandName}</td>
+	        <td>{$T.row.isIntelliSense == 1 ? '是':'否'}</td>
+	        <td>{$T.row.createTime != null ?  $T.row.createTime:"--"}</td>
+	        <td>{$T.row.updateTime != null ? $T.row.updateTime:"--"}</td>
+	        <td>{$T.row.operator}</td>
+	         {#if $T.row.fieldName =="LONGITUDE" || $T.row.fieldName =="LATITUDE"}
+	           <td><font color="red">地图坐标不能操作</font></td> 
+	         
+	         {#else}	
+	        	 <td><a href="/searchH/phtml/searchapp/searchruledate.html?id={$T.row.id}&appId={$T.app_id}" class="ml10">编辑</a><a href="javascript:QueryMain.btn_delete_click('/searchRuleDate/deleteSearchRuleDate.wap','{$T.row.id}','{$T.row.fieldName}');" class="ml10" >删除</a></td> 
+
+	         {#/if}
+		      </tr>
+      {#/foreach} 
+    </tbody>
+    </textarea>
+</div>
+<div id="nextPage" style="display: none"></div>
+<input type="hidden" id="flag"/>
+</body>
+<!-- 分页处理开始 -->
+<input type="hidden" id="pageNo"   name="pageNo"  value="1" />
+<div id="Pagination">
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var map = getUrlParams();
+	var flag = map.get("app_id");
+	if(flag!=null&&flag!=''){
+		$("#flag").val(flag);
+	}
+});
+function add(){
+	location.href="/searchH/phtml/searchapp/searchruledate.html?appId="+document.getElementById('hidden_appId').value;
+}
+</script>
+</html>

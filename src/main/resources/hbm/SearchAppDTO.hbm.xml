@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.sinovatech.search.entity.SearchAppDTO"  table="SEARCH_APP" >
+ <comment>注册应用业务表</comment>
+  <id name="id"  type="java.lang.String" >
+  <column  name="ID"  length="32"  />
+  <generator class="uuid.hex" />
+ </id>
+    <property  name="appName"  type="java.lang.String" >
+     <column  name="APP_NAME"  length="50" >
+         <comment>注册业务应用名称</comment>
+     </column>
+   </property>
+    <property  name="appCode"  type="java.lang.String" >
+     <column  name="APP_CODE"  length="32" >
+         <comment>注册应用编码</comment>
+     </column>
+   </property>
+   <property  name="IPS"  type="java.lang.String" >
+     <column  name="IPS"  length="2500" >
+         <comment>IP规则</comment>
+     </column>
+   </property>
+    <property  name="indexPath"  type="java.lang.String" >
+     <column  name="INDEX_PATH"  length="100" >
+         <comment>索引路径</comment>
+     </column>
+   </property>
+    <property  name="indexType"  type="java.lang.String" >
+     <column  name="INDEX_TYPE"  length="1" >
+         <comment>索引方式:1推送2视图</comment>
+     </column>
+   </property>
+    <property  name="currentDir"  type="java.lang.String" >
+     <column  name="CURRENT_DIR"  length="50" >
+         <comment>当前索引文件夹:dateindex和dateindexbak</comment>
+     </column>
+   </property>
+ <property  name="loopCindexTime"  type="java.lang.Long" >
+   <column  name="LOOP_CINDEX_TIME"  >
+   <comment>定时重建索引（单位分钟）</comment>
+   </column>
+  </property>
+    <property  name="shellPath"  type="java.lang.String" >
+     <column  name="SHELL_PATH"  length="100" >
+         <comment>同步脚本</comment>
+     </column>
+   </property>
+    <property  name="state"  type="java.lang.String" >
+     <column  name="STATE"  length="1" >
+         <comment>状态：1启用2停用</comment>
+     </column>
+   </property>
+ <property  name="createTime"  type="java.util.Date" >
+   <column  name="CREATE_TIME"  >
+   <comment>注册时间</comment>
+   </column>
+  </property>
+ <property  name="updateTime"  type="java.util.Date" >
+   <column  name="UPDATE_TIME"  >
+   <comment>修改时间</comment>
+   </column>
+  </property>
+    <property  name="operator"  type="java.lang.String" >
+     <column  name="OPERATOR"  length="50" >
+         <comment>操作人</comment>
+     </column>
+   </property>
+   <property  name="isDelete"  type="java.lang.String" >
+     <column  name="IS_DELETE"  length="1" >
+         <comment>是否已经删除1.删除2.显示</comment>
+     </column>
+   </property>
+   <property  name="isReset"  type="java.lang.String" >
+     <column  name="IS_RESET"  length="1" >
+         <comment>是否需要重启:1不需要2需要</comment>
+     </column>
+   </property>
+  </class>
+</hibernate-mapping>
+ 
+

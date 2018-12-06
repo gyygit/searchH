@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+  <bean id="searchRuleDateDAO"  class="com.sinovatech.search.daos.SearchRuleDateDAO" />
+  <bean id="searchKeywordLogDAO"  class="com.sinovatech.search.daos.SearchKeywordLogDAO" />
+  <bean id="searchCommandDAO"  class="com.sinovatech.search.daos.SearchCommandDAO" />
+  <bean id="searchAppDAO"  class="com.sinovatech.search.daos.SearchAppDAO" />
+  <bean id="dictionaryindexDAO"  class="com.sinovatech.search.daos.DictionaryindexDAO" />
+  <bean id="dictionaryDAO"  class="com.sinovatech.search.daos.DictionaryDAO" />
+  <bean id="searchMessageDAO"  class="com.sinovatech.search.daos.SearchMessageDAO" />
+  
+  <bean id="initDbLuceneConnection" class="com.sinovatech.search.luceneindex.db.InitDbLuceneConnection" />
+  <bean id="searchRuleDateDAOL"  class="com.sinovatech.search.luceneindex.db.dao.SearchRuleDateDAO" />
+  <bean id="searchKeywordLogDAOL"  class="com.sinovatech.search.luceneindex.db.dao.SearchKeywordLogDAO" />
+  <bean id="searchCommandDAOL"  class="com.sinovatech.search.luceneindex.db.dao.SearchCommandDAO" />
+  <bean id="searchAppDAOL"  class="com.sinovatech.search.luceneindex.db.dao.SearchAppDAO" />
+  <bean id="dictionaryindexDAOL"  class="com.sinovatech.search.luceneindex.db.dao.DictionaryindexDAO" />
+  <bean id="dictionaryDAOL"  class="com.sinovatech.search.luceneindex.db.dao.DictionaryDAO" />
+  <bean id="searchMessageDAOL"  class="com.sinovatech.search.luceneindex.db.dao.SearchMessageDAO" />
+  <bean id="luceneSearchDAOL"  class="com.sinovatech.search.luceneindex.db.dao.LuceneSearchDAO " />
+  <bean id="synonymWordDAOL" class="com.sinovatech.search.luceneindex.db.dao.SynonymWordDAO"/>
+  <bean id="userDAO"  class="com.sinovatech.search.luceneindex.db.dao.UserDAO" />
+  <bean id="recommendDAO"  class="com.sinovatech.search.luceneindex.db.dao.RecommendDAO" />
+  <bean id="searchLoggerDAOL" class="com.sinovatech.search.luceneindex.db.dao.SearchLoggerDAO"/>
+  <bean id="clickVisitLogInfoDAOL" class="com.sinovatech.search.luceneindex.db.dao.ClickVisitLogInfoDAO"/>
+  <bean id="searchRuleDateDAO1"  class="com.sinovatech.search.luceneindex.db.dao.SearchRuleDateDAO1" />
+  <bean id="createIndexProcessLogDAOL"  class="com.sinovatech.search.luceneindex.db.dao.CreateIndexProcessLogDAO" />
+</beans>

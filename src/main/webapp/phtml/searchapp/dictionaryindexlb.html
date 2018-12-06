@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/mianBox.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/pagination.css" />
+<script src="../common/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="../common/js/jquery-jtemplates.js"></script>
+<!--<script src="../common/js/jquery.simplemodal.1.4.3.min.js"></script>
+--><script src="../common/js/title.js" type="text/javascript"></script>
+<script src="../common/js/public.js" type="text/javascript"></script>
+<script src="../common/js/commonBase.js" type="text/javascript"></script>
+<script src="../js/dictionaryindexlist.js" type="text/javascript"></script>
+<script src="../common/js/jquery.pagination.js" type="text/javascript"></script>
+<script src="../common/js/splitPage.js" type="text/javascript"></script>
+<script src="../common/js/ajaxSetupSet.js" type="text/javascript"></script>
+</head>
+<body class="bg_cff">
+<div class="leftDiv" id="leftDiv">
+</div>
+<div class="mainBox">
+	<div class="route"><span>数据字典主表</span>&nbsp;&gt;&nbsp;<span>数据字典主表管理</span>
+	<span id="verspan">	</span>
+	</div>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			class="tb_searchbox mt20 bord_gray">
+			<tr>
+				<td align="right">数据字典主表名称：&nbsp;</td>
+				<td><input name="tab_indexname" id="tab_indexname" type="text"
+					class="input_normal w160" />
+				</td>
+				<td align="right">数据字典主表code：&nbsp;</td>
+				<td><input name="tab_indexcode" id="tab_indexcode"
+					type="text" class="input_normal w160" />
+				</td>
+				 <td align="right">状态：&nbsp;</td>
+				 <td><select name="tab_status" id="tab_status">
+        		<option VALUE="">全部</option>
+        		<option VALUE="1" >可用</option>
+        		<option VALUE="2" >不可用</option>
+        	</select></td>
+
+			</tr>
+			<tr>
+				<td colspan="6" align="right"><p class="mr20">
+					<a href="javascript:;" onClick="QueryMain.cleanSearch()"; class="bt_blue"><span>清空</span></a>&nbsp;&nbsp;&nbsp;	<a href="javascript:;"
+							onClick="$('#pageNo').val('1');dictionaryindexlist.query();"
+							; class="bt_blue"><span>查询</span> </a>
+					</p>
+				</td>
+			</tr>
+		</table>
+<p class="overflow text_r mt10">
+			<a href="/searchH/phtml/searchapp/dictionaryindex.html"
+				class="bt_blue ml20"><span>新增数据字典主表</span> </a><a href="javascript:;"
+				class="bt_blue ml10"
+				onclick="QueryMain.btn_delete_click('/dictionaryindex/deleteDictionaryindex.wap')"><span>批量删除</span>
+			</a>
+		</p>
+		<table width="100%" style="border:1px solid #e3e3e3;" id="result"
+			class="tb_content1"></table>
+		<textarea id="templateContainer" style="display: none;"> 
+	    <tbody>
+	      <tr>
+	       <th width="30"><input class="checkedAll" type="checkbox"
+						onclick="QueryMain.checkAll();" name="items1" />
+					</th> 
+	       <!--  <th>ID</th> -->
+	        <th>数据字典主表code</th>
+	        <th>数据字典主表名称</th>
+	        <th>数据字典主表描述</th>
+	        <th>状态</th>
+	        <th>更新时间</th>
+	        <th>操作</th>
+	      </tr>
+	       
+	        {#foreach $T.list as row}
+			<tr>
+			 <td><input type="checkbox" name="items" value="{$T.row.id}" onclick="QueryMain.checkPart();"/>
+					</td>
+	     <!--    <td>{$T.row.id}</td> -->
+	        <td>{$T.row.indexcode}</td>
+	        <td>{$T.row.indexname}</td>
+	        <td>{$T.row.description}</td>
+	        <td>{$T.row.status == "1" ? "可用":"不可用"}</td>
+	      
+	        <td>{$T.row.updatetime}</td>
+	        <td>
+	        	<a
+						href="/searchH/phtml/searchapp/dictionaryindex.html?id={$T.row.id}"
+						class="ml10">编辑</a><a
+						href="/searchH/phtml/searchapp/dictionarylb.html?index_id={$T.row.id}"
+						class="ml10">数据字典子表</a>
+	      <a
+						href="javascript:QueryMain.btn_delete_click('/dictionaryindex/deleteDictionaryindex.wap','{$T.row.id}','{$T.row.indexname}');"
+						class="ml10">删除</a>
+	         <!--	{#if $T.row.state == '2'}
+	        		<a href="javascript:dictionaryindexlist.start('{$T.row.id}');">启用</a>
+	        	{#else}
+	        		<a href="javascript:dictionaryindexlist.stop('{$T.row.id}');">停用</a>
+	        	{#/if}
+	        	<!--{#if $T.row.isReset == '2'}
+	        		{#if $T.row.state == '1'}
+	        			<a href="javascript:searchAppList.reset('{$T.row.id}');">重新启用</a>
+	        		{#/if} 
+	        	{#/if}-->
+	        </td>
+	      </tr>
+	         {#/foreach}
+	         </tbody>
+		</textarea>
+	</div>
+	<div id="nextPage" style="display: none"></div>
+	<input type="hidden" id="pageNo" value="1" />
+	<input type="hidden" id="flag" />
+</body>
+<!-- 分页处理开始 -->
+<input type="hidden" id="pageNo" name="pageNo" value="1" />
+<div id="Pagination"></div>
+
+<script>
+     var ver="版本:1.8.2";
+      $("#ver").html(ver);
+</script>
+</html>

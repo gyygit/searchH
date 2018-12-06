@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.sinovatech.search.entity.SearchCommandDTO"  table="SEARCH_COMMAND" >
+ <comment>业务数据类型表</comment>
+  <id name="id"  type="java.lang.String" >
+  <column  name="ID"  length="32"  />
+  <generator class="uuid.hex" />
+ </id>
+    <property  name="appId"  type="java.lang.String" >
+     <column  name="APP_ID"  length="32" >
+         <comment>业务应用id</comment>
+     </column>
+   </property>
+    <property  name="appCode"  type="java.lang.String" >
+     <column  name="APP_CODE"  length="50" >
+         <comment>业务应用编码</comment>
+     </column>
+   </property>
+    <property  name="commandCode"  type="java.lang.String" >
+     <column  name="COMMAND_CODE"  length="100" >
+         <comment>业务数据分类编码</comment>
+     </column>
+   </property>
+    <property  name="viewName"  type="java.lang.String" >
+     <column  name="VIEW_NAME"  length="100" >
+         <comment>索引方式:1推送2视图</comment>
+     </column>
+   </property>
+ <property  name="sqlWhere"  type="java.lang.String" >
+   <column  name="SQL_WHERE"  length="100">
+   <comment>定时重新创建索引:单位是分钟</comment>
+   </column>
+  </property>
+ <property  name="createTime"  type="java.util.Date" >
+   <column  name="CREATE_TIME"  >
+   <comment>注册时间</comment>
+   </column>
+  </property>
+ <property  name="updateTime"  type="java.util.Date" >
+   <column  name="UPDATE_TIME"  >
+   <comment>修改时间</comment>
+   </column>
+  </property>
+    <property  name="operator"  type="java.lang.String" >
+     <column  name="OPERATOR"  length="50" >
+         <comment>操作人</comment>
+     </column>
+   </property>
+   
+    <property  name="userName"  type="java.lang.String" >
+     <column  name="USER_NAME"  length="32" >
+         <comment>用户名</comment>
+     </column>
+   </property>
+    <property  name="passWord"  type="java.lang.String" >
+     <column  name="PASS_WORD"  length="32" >
+         <comment>密码</comment>
+     </column>
+   </property>
+    <property  name="linkAddress"  type="java.lang.String" >
+     <column  name="LINK_ADDRESS"  length="100" >
+         <comment>链接地址</comment>
+     </column>
+   </property>
+    <property  name="extend"  type="java.lang.String" >
+     <column  name="EXTEND"  length="32" >
+         <comment>用户名</comment>
+     </column>
+   </property>
+  </class>
+</hibernate-mapping>
+ 
+

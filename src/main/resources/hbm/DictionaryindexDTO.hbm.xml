@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.sinovatech.search.entity.DictionaryindexDTO"  table="DICTIONARYINDEX" >
+ <comment>数据字典主表</comment>
+  <id name="id"  type="java.lang.String" >
+  <column  name="ID"  length="32"  />
+  <generator class="uuid.hex" />
+ </id>
+    <property  name="indexcode"  type="java.lang.String" >
+     <column  name="INDEXCODE"  length="80" >
+         <comment>数据字典主表code</comment>
+     </column>
+   </property>
+    <property  name="indexname"  type="java.lang.String" >
+     <column  name="INDEXNAME"  length="80" >
+         <comment>数据字典主表名称</comment>
+     </column>
+   </property>
+    <property  name="description"  type="java.lang.String" >
+     <column  name="DESCRIPTION"  length="200" >
+         <comment>数据字典主表描述</comment>
+     </column>
+   </property>
+    <property  name="status"  type="java.lang.String" >
+     <column  name="STATUS"  length="1" >
+         <comment>状态1可用2不可用</comment>
+     </column>
+   </property>
+ <property  name="updatetime"  type="java.util.Date" >
+   <column  name="UPDATETIME"  >
+   <comment></comment>
+   </column>
+  </property>
+  </class>
+</hibernate-mapping>
+ 
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.sinovatech.search.entity.SearchRuleDateDTO"  table="SEARCH_RULE_DATE" >
+ <comment>索引数据配置表</comment>
+  <id name="id"  type="java.lang.String" >
+  <column  name="ID"  length="32"  />
+  <generator class="uuid.hex" />
+ </id>
+    <property  name="appId"  type="java.lang.String" >
+     <column  name="APP_ID"  length="32" >
+         <comment>业务应用id</comment>
+     </column>
+   </property>
+    <property  name="appCode"  type="java.lang.String" >
+     <column  name="APP_CODE"  length="50" >
+         <comment>业务应用编码</comment>
+     </column>
+   </property>
+    <property  name="fieldName"  type="java.lang.String" >
+     <column  name="FIELD_NAME"  length="50" >
+         <comment>字段名称</comment>
+     </column>
+   </property>
+    <property  name="fileldDateType"  type="java.lang.String" >
+     <column  name="FILELD_DATE_TYPE"  length="1" >
+         <comment>字段值类型1:String,2:int,3:float</comment>
+     </column>
+   </property>
+    <property  name="fieldIndexType"  type="java.lang.String" >
+     <column  name="FIELD_INDEX_TYPE"  length="1" >
+         <comment>字段索引类型1:不索引,2:不分词索引,3:分词索引</comment>
+     </column>
+   </property>
+    <property  name="fieldStoreType"  type="java.lang.String" >
+     <column  name="FIELD_STORE_TYPE"  length="1" >
+         <comment>字段值是否存储1:存储,2:不存储</comment>
+     </column>
+   </property>
+   <property  name="isIntelliSense"  type="java.lang.String" >
+     <column  name="IS_INTELLISENSE"  length="1" >
+         <comment>字段值是否存储1:存储,2:不存储</comment>
+     </column>
+   </property>
+    <property  name="commandCode"  type="java.lang.String" >
+     <column  name="COMMAND_CODE"  length="50" >
+         <comment>业务数据类型编码</comment>
+     </column>
+   </property>
+ <property  name="createTime"  type="java.util.Date" >
+   <column  name="CREATE_TIME"  >
+   <comment>注册时间</comment>
+   </column>
+  </property>
+ <property  name="updateTime"  type="java.util.Date" >
+   <column  name="UPDATE_TIME"  >
+   <comment>修改时间</comment>
+   </column>
+  </property>
+    <property  name="operator"  type="java.lang.String" >
+     <column  name="OPERATOR"  length="50" >
+         <comment>操作人</comment>
+     </column>
+   </property>
+    <property  name="commandName"  type="java.lang.String" >
+     <column  name="COMMAND_NAME"  length="50" >
+         <comment>操作人</comment>
+     </column>
+   </property>
+  </class>
+</hibernate-mapping>
+ 
+

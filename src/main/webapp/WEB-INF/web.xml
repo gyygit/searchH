@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>Archetype Created Web Application</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/applicationContext-spring.xml</param-value>
+	</context-param>
+
+	<!-- 設定Spring Context的默认Profile -->
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>production</param-value>
+	</context-param>
+	<!-- ec table properties -->
+	<context-param>
+		<param-name>extremecomponentsPreferencesLocation</param-name>
+		<param-value>/extremetable.properties</param-value>
+	</context-param>
+
+	<!--Spring ApplicationContext 载入 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	
+	<!-- security filter begin 安全过滤包-->
+	<filter>
+		<filter-name>xssFilter</filter-name>
+		<filter-class>com.sinovatech.filter.XssFilter</filter-class>
+		<init-param>
+			<param-name>urlCode</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>must</param-name>
+			<param-value>
+        <!--  <![CDATA[[,],{,},<,>,\\,*,\",']]>-->
+        <![CDATA[<,>,']]>
+      </param-value>
+		</init-param>
+		<init-param>
+			<param-name>notfilter</param-name>
+			<param-value>searchApp/tuiMsg</param-value>
+		</init-param>
+		<init-param>
+			<param-name>enableUrlSession</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forbidenRes</param-name>
+			<param-value>
+        <!-- <![CDATA[[,],(,),{,},<,>,\\,*,\",']]> -->
+        <![CDATA[<,>,']]>
+      </param-value>
+		</init-param>
+		<init-param>
+			<param-name>handType</param-name>
+			<param-value>SBC</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>xssFilter</filter-name>
+		<url-pattern>/searchH/searchKeywordLog/querySearchKeywordLog.wap</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>xssCsrfFilter</filter-name>
+		<filter-class>com.sinovatech.xsscsrf.filters.XssCsrfFilter</filter-class>
+		<init-param>
+			<param-name>trust</param-name>
+			<param-value>10.143.130.,google.,baidu.,10010.com,10010.cn,123.125.96.35,open.z.qq.com</param-value>
+		</init-param>
+		<init-param>
+			<param-name>notfilter</param-name>
+			<param-value>searchApp/tuiMsg</param-value>
+		</init-param>
+		<init-param>
+			<param-name>isStartFilter</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>xssCsrfFilter</filter-name>
+		<url-pattern>/searchH/searchKeywordLog/querySearchKeywordLog.wap</url-pattern>
+	</filter-mapping>
+	<!-- security filter end -->
+	
+
+	<!-- Character Encoding filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- <filter-mapping> <filter-name>xssFilter</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
+
+	<filter>
+		<filter-name>exception</filter-name>
+		<filter-class>com.sinovatech.search.filter.ExceptionMappingFilter</filter-class>
+		<init-param>
+			<param-name>noturi</param-name>
+			<param-value>.jsp,.js,.html,.jpg,.png,.css,searchApp/getAppCache</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>exception</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+  	<!-- bms引入 START -->
+  	<!--  
+	<filter> 
+ 		<filter-name>integrateFilter</filter-name> 
+ 		<filter-class>com.sinovatech.bms.client.filter.IntegrateFilter</filter-class> 
+ 	</filter> 
+ 	<filter-mapping> 
+ 		<filter-name>integrateFilter</filter-name> 
+ 		<url-pattern>*.html</url-pattern> 
+ 	</filter-mapping>
+ 	--> 
+	<!-- bms引入 END -->
+
+
+	<!-- 免登陆过滤器：如果接入bms 这个filter也是必须要用的;如果使用搜索后台登录方式，该filter必须注释掉 -->
+	<!--  
+	<filter>
+		<filter-name>supermanFilter</filter-name>
+		<filter-class>com.sinovatech.search.filter.BmsIntegrationSupermanFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>supermanFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ 	-->
+
+ 	<!-- 搜索后台登陆过滤器  当不接入bms并不使用免登陆时使用-->
+	<filter>  
+	    <filter-name>sessionFilter</filter-name>  
+	    <filter-class>com.sinovatech.search.filter.SessionFilter</filter-class>  
+	    <init-param>
+			<param-name>noturi</param-name>
+			<param-value>/searchApp/tuiHotWord,/user/login,/searchH/phtml/login.html,/searchApp/getAppCache,/searchApp/tuiMsg,/searchApp/querySearchDic,/searchApp/queryTongyici,/searchApp/queryTuijian</param-value>
+		</init-param>
+	</filter>  
+	<filter-mapping>  
+	    <filter-name>sessionFilter</filter-name>  
+	    <url-pattern>/*</url-pattern>  
+	</filter-mapping> 
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+	 
+
+	<!-- Spring MVC Servlet -->
+	<servlet>
+		<servlet-name>springServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>initOnStartupServlet</servlet-name>
+		<servlet-class>com.sinovatech.common.web.init.AppInitServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>destroyIndexWritrServlet</servlet-name>
+		<servlet-class>com.sinovatech.search.filter.DestroyIndexWritrServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/phtml/index.html</location>
+	</error-page>
+
+	<welcome-file-list>
+	<!-- 如果登录访问后台 -->
+	<welcome-file>/phtml/index.html</welcome-file>
+		<!-- 如果接入bms或者免登陆使用后台-->
+<!-- 	<welcome-file>/phtml/index.html</welcome-file> -->
+	</welcome-file-list>
+</web-app>

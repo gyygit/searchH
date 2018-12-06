@@ -1,0 +1,710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/mianBox.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/pagination.css" />
+ <style >
+ 
+/*边框*/
+.borlr{border-left:1px solid #DFDFDF; border-right:1px solid #DFDFDF;}
+.bortlr{border-top:1px solid #DFDFDF;border-left:1px solid #DFDFDF; border-right:1px solid #DFDFDF;}
+.borblr{border:1px solid #dfdfdf; border-top:0 none;}
+.borr{border-right:1px solid #DFDFDF}
+.borl{border-left:1px solid #DFDFDF}
+.borb{border-bottom:1px solid #DFDFDF}
+.bort{border-top:1px solid #DFDFDF}
+.bord_gray{border:1px solid #DFDFDF}
+.borb_xu{border-bottom:1px dashed #DFDFDF}
+.bord_blue{border:1px solid #96d5fb}
+/*边距*/
+.lineh18{ line-height:18px;} 
+.lineh20{line-height:20px;}
+.lineh25{ line-height:25px;} 
+.lineh30{line-height:30px;}
+.lineh32{line-height:32px;}
+.lineh40{line-height:40px;}
+.textint2{ text-indent:2em;}
+.textint1{ text-indent:1em;}
+.text_line{ text-decoration:underline;}
+.text_through{text-decoration:line-through}
+/*字体*/
+.font12{ font-size:12px;}
+.font13{ font-size:13px;}
+.font14{ font-size:14px;}
+.font16{ font-size:16px;}
+.font18{ font-size:18px;}
+.font20{ font-size:20px;}
+.font24{ font-size:24px;}
+.fontb{ font-weight:bold;}
+.fontnor{ font-weight:normal;}
+
+/*背景颜色*/
+.bg_ea{ background:#eaeaea}
+.bg_cff{ background:#fff}
+.bg_dl{ background:#bfe7ff;}
+.hand{ cursor:pointer}
+.default{ cursor:default}
+.bg_eb{ background:#ebebeb}
+.bg_f7{ background:#f7f7f7}
+ </style>
+</head>
+<body class="bg_cff">
+<!-- 查看 结束 -->
+<p class="lineh40 borb font16">
+		&nbsp;<span style="font-weight: bold;">搜索API帮助</span> 
+	</p>
+	<div class="showInfo">
+		<table width="100%">
+			<tbody>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					构造条件类：Condition
+				</th>
+				<th align="left" class="bg_f7">
+				 
+					<br> 
+					 1 Condition.Logic逻辑选择。包含参数如下
+					<br>
+					   &nbsp;&nbsp;Condition.Logic.AND 并且 &&的概念
+					 <br>
+					   &nbsp;&nbsp;Condition.Logic.OR 或 ||的概念
+					 <br>
+					   &nbsp;&nbsp;Condition.Logic.NOT 非 ！的概念
+					<br> 
+					 
+					 2 Condition.Opt操作符。包含参数如下
+					<br>
+					&nbsp;&nbsp;Condition.Opt.EQ 精确比较，作用于非拆词索引字段
+					<br>
+		            &nbsp;&nbsp;Condition.Opt.LIKE 后匹配模糊搜索(XXX%)作用于非拆词索引字段,(拆词字段也可以用，不过不推荐)
+		    		<br>
+		            &nbsp;&nbsp;Condition.Opt.LIKE_ANALYZER 全文搜索，用于拆词字段索引，自动分词搜索(也可以用于非拆词字段，不过不推荐)
+		            <br>
+		            &nbsp;&nbsp;Condition.Opt.BETWEEN_OPEN 范围搜索，开区间(一般用于价格区间搜索)
+		            <br>
+		            &nbsp;&nbsp;Condition.Opt.BETWEEN_CLOSE 范围搜索，闭区间(一般用于价格区间搜索)
+					<br>
+				 
+					 3 Condition.StringOrInt字段类型，包含参数如下
+					<br>
+					&nbsp;&nbsp;Condition.StringOrInt.STRING 字段类型是字符串，如果不指定默认是字符串
+					<br>
+		            &nbsp;&nbsp;Condition.StringOrInt.INT 字段类型是数字，用于价格区间及排序功能
+		            <br> 
+		             
+				</th>
+			</tr>
+			
+			
+			<tr>
+			<th align="right" style="width: 180px;" class="bg_eb">
+					查询载体类：&nbsp;LucenePage
+				</th>
+				<th align="left" class="bg_f7">
+					<br> 
+					 1 LucenePage.ORDER排序。包含参数如下
+					<br><br>
+					   &nbsp;&nbsp;Condition.ORDER.ASC 顺序
+					 <br>
+					   &nbsp;&nbsp;Condition.ORDER.DESC 降序
+					 <br><br>
+					  
+					 
+					 2 高亮显示设置
+					<br><br>
+					&nbsp;&nbsp;LucenePage.addHighlighterMap(String hfiled)//增加要高亮显示的字段值
+					<br>
+		            &nbsp;&nbsp;LucenePage.setHighLighterWord(String highLighterWord)//高亮显示的词是什么，一般设置输入文本框的内容，类似baidu输入框
+		    		<br><br>
+		             
+					 3 设置热词记录LucenePage.setWriteHotword(String writeHotword)//如果设置则会写到热词库
+					<br><br>
+					 4检测非法词字段LucenePage.setSearchKeyName(String searchKeyName) //验证非法词的字段名
+					<br><br>
+					 5验证非法词的内容LucenePage.setSearchKeyWord(String searchKeyWord) //验证非法词的内容
+				    <br><br>
+		             6设置排序字段LucenePage.addSortList(String field,LucenePage.ORDER order )//设置排序字段
+		            <br> <br>
+		             7设置查询条件LucenePage.setQueryStr(String queryStr)//设置查询条件
+		             <br> <br>
+		             8设置分组查询的分组字段LucenePage.setGroup_groupField(String group_groupField) //设置分组查询的分组字段
+		             <br> <br>
+		             9设置分组查询查询单组包含的记录条数LucenePage.setGroup_zuSize(int group_zuSize) //设置分组查询查询单组包含的记录条数
+		             <br> <br>
+		             10分组查询返回结果LucenePage.getListGroupData()//分组查询返回结果
+		             <br> <br>
+		             11查询结果LucenePage.getListData()//查询结果
+		              <br> <br>
+		             12设置同义词查询LucenePage.setIsIntellisense("Y")//开启同义词查询
+		              <br> <br>
+		             13设置要查询的同义词和推荐词LucenePage.setSearchKeyWord("中兴")()//设置同义词要查询的词
+		              <br> <br>
+		             14设置查询方式：page.setType("MTC")M:支持中间分词查询，T传入参数按照拼音再搜索，C错别字修正
+		               <br> <br>
+		             15错字词联想： page3.getRmap.get("S01")//不为空则有错误词纠正
+		              <br> <br>
+		             16推荐信息： List &lt;Map&lt;String,String&gt;&gt;  getRecommendListDate() //index.of(getSearchKeyWord("中兴"))后的推荐信息
+		              
+				</th> 
+			</tr>
+		   <tr>
+			<th align="right" style="width: 180px;" class="bg_eb">
+					查询示例：&nbsp;demo
+			</th>
+				<th align="left" class="bg_f7">
+					<br> 
+					 1 普通查询
+					<br><br>
+					   &nbsp;&nbsp;LucenePage page1 =new LucenePage("shitu",new String[]{"shitu"});//构造实体查询类，参数分别是appcode，和commandcode
+					 <br>
+					   &nbsp;&nbsp;Condition con = new Condition();con.addCondition("BRAND_ID", pinpai , Condition.Opt.EQ , Condition.Logic.AND);
+					 <br>
+					   &nbsp;&nbsp;page1.setQueryStr(con.builder());
+					 <br>
+					   &nbsp;&nbsp;page1.setRowDisplayed(20);
+					 <br>
+					   &nbsp;&nbsp;page1 = LuceneQueryUtil.query(page1); List  dd =page1.getListData();
+				  
+				    <br/>
+					<br>2价格范围查询<br>
+					 <br/> List<Condition> s= new ArrayList<Condition>();
+						<br/>if(minPrice != null){
+						<br/>	s.add(new Condition("",minPrice+Condition.BETWEEN_SPLIT_STR+maxPrice,Condition.Opt.BETWEEN_CLOSE,Condition.Logic.AND,Condition.StringOrInt.INT));
+						<br/>	con.addCondition("MALL_PRICE", s, Condition.Logic.AND);
+						<br/>}
+					 <br/>	
+					 <br>3多字段排序<br/>
+					   <br/>&nbsp;&nbsp;page1.addSortList("TITLE",LucenePage.ORDER.SCORE);
+					   <br/> page1.addSortList("TITLE1",LucenePage.ORDER.ASC);
+					 <br/>
+					 <br>4小括号添加<br/>
+					 <br/>List<Condition> orWhere1= new ArrayList<Condition>();
+		             <br/>orWhere1.add(new Condition("pinpai", "三星",  Condition.Opt.EQ,Condition.Logic.OR));
+		             <br/>orWhere1.add(new Condition("tttt", "xxx",  Condition.Opt.EQ,Condition.Logic.OR));
+		             <br/>
+			         <br>5智能查询<br/>
+			         <br/>LucenePage page3 =new LucenePage("shitu",new String[]{"shitu"}); 
+		             <br/>page3.setHighLighterWord(zhinengword);
+		             <br/>//1可以增加查询条件
+		             <br/>//page3.setQueryStr(con.builder());
+		             <br/> //page3.setType("M")//按照中间查询
+		             <br/>//page3.setType("MT")//按照中间和拼音（先把汉子转化成拼音）查询
+		             <br/>//page3.setType("MTC")//按照中间和拼音（先把汉子转化成拼音）且错别词纠正查询
+		             <br/>//page3.getRmap.get("S01")//不为空则有错误词纠正。
+		             <br/>page3 =LuceneQueryUtil.queryIntellisense(page3); 
+		             <br/>List &lt;&lt;Map &lt;String, String&gt;&gt;data =page3.getListData(); 
+		             <br/>
+		             <br>6分组查询<br/>
+			         <br/>page1.setGroup_groupField("COLOR");
+					 <br/>page1.setGroup_zuSize(10);
+		             <br/>page1 = LuceneQueryUtil.queryGroup(page1);
+		             <br/> Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; mapdata =page1.getListGroupData(); 
+		             <br/>
+		             <br>7优化查询，一次返回100条，内存分页<br/>
+			          page1.setType("Y")
+			         <br/>
+			         <br>8使用同义词查询<br/>
+			          <br/>LucenePage page1 =new LucenePage("product",new String[]{"product"}); 
+			          <br/>page1.setIsIntellisense("Y")//开启同义词查询
+			          <br/>page1.setSearchKeyWord("中兴");//设置要查询的内容（本appcode下的智能提示字段）
+			          <br/>page1.getRecommendListDate()//获取推荐的内容
+			          <br><br/>
+			         <br>9地图查询<br/>
+			         <br><font color="red">注意：在接入视图的字段里必须包含LONGITUDE和LATITUDE两个字段，该两个字段在创建该业务commandcode时候自动创建字段对应关系</font>
+			         <br/>LucenePage page1 =new LucenePage("mapdemo",new String[]{"taotuomapdemo"}); 
+			         <br/>page1.setType("CTM");//可以设置成MTCP，注意顺序放在上面。
+			         <br/>page1.addHighlighterMap("NAME");//增加要高亮显示的字段值 
+           			 <br/>page1.setHighLighterWord(zhinengword);//高亮显示的词是什么，一般设置输入文本框的内容，类似baidu输入框 
+            		 <br/>page1.setLocal(121.41791,31.21867,int_juli, LucenePage.ORDER.ASC);//坐标，距离，有近到远。
+            		 <br/>page1 =LuceneQueryUtil.queryIntellisense(page1);//智能查询和普通查询都可以
+            		 <br/>page1 =LuceneQueryUtil.query(page1);//智能查询和普通查询都可以
+				</th>
+				
+			
+			</tr>	 
+		</tbody></table>
+	</div>
+	 
+</div>
+<!-- 查看 结束 -->  
+<div class="route"  align="center"> <font size="5"> 版本更新内容 </font></div>
+
+<!-- 查看 开始 -->
+<div class="borblr">
+	<p class="lineh40 borb font16">
+		&nbsp;<span style="font-weight: bold;">版本对应修改功能点</span> 
+	</p>
+	<div class="showInfo">
+		<table width="100%">
+			<tbody>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心2.0.2.0版本(search-client-2.0.0.0-SNAPSHOT.jar)</font>
+				</th>
+				<th align="left" class="bg_f7">
+					<table>
+						<tr>
+							<td><font color="red">功能：在weblogic上部署不需要重启节点支持控制台部署</font></td>
+						    <td> <font color="green">在weblogic上部署不需要重启节点支持控制台部署</font>  
+						    </td>          
+						</tr> 
+						 <tr>
+							<td><font color="red">功能：优化版本信息，searchH，searchweb 增加版本信息</font></td>
+						    <td> <font color="green">优化版本信息，searchH，searchweb 增加版本信息</font>  
+						    </td>          
+						</tr> 
+						<tr>
+							<td><font color="red">功能：增加相关度排序参数</font></td>
+						    <td> <font color="green">增加相关度排序参数</font>  
+						    </td>          
+						</tr> 
+					</table>
+				</th>
+				</tr>
+			<tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心2.0.1.0版本(search-client-2.0.0.0-SNAPSHOT.jar)</font>
+				</th>
+				<th align="left" class="bg_f7">
+					<table>
+						<tr>
+							<td><font color="red">功能：支持一个commandcode可以设置多个智能提示字段</font></td>
+						    <td> <font color="green">支持一个commandcode可以设置多个智能提示字段</font>  
+						    </td>          
+						</tr> 
+						 
+					</table>
+				</th>
+				</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心2.0.0.0版本(search-client-2.0.0.0-SNAPSHOT.jar)</font>
+				</th>
+				<th align="left" class="bg_f7">
+					<table>
+						<tr>
+							<td><font color="red">功能：增加地图搜索功能</font></td>
+						    <td> <font color="green">搜索中心接入appcdoe对应的业务分类(commandcode)增加地图搜索功能服务，可提供搜索附近店铺功能，根据当前坐标，范围来由远到近，有近到远，来查询数据信息</font>  
+						    </td>          
+						</tr> 
+						 
+						 
+						<tr>
+							<td><font color="red">功能：增加默认接入应用mapdemo地图应用</font></td>
+						    <td> <font color="green">搜索系统启动后会自动创建一个接入应用提供地图搜索,可供演示，学习等</font>
+						     <br>
+						     <font color="green">6搜索附近店铺功能。可按距离，筛选条件进行筛选</font> 
+						      <br>
+						      <font color="green">7店铺坐标在百度地图上打点功能</font>    
+						    </td>          
+						</tr>
+					 
+					</table>
+				</th>
+				</tr>
+				<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.9.0.0版本(search-client-1.8.0.0-SNAPSHOT.jar)</font>
+				</th>
+				<th align="left" class="bg_f7">
+					<table>
+						<tr>
+							<td><font color="red">功能：对于接入应用关键操作增加遮罩置灰</font></td>
+						    <td> <font color="green">对于计入应用暂停、启用、重新启用等操作增加并发控制</font>  
+						    </td>          
+						</tr> 
+						<tr>
+							<td><font color="red">优化：修改appcode，自动修改commandcode业务对应的appcode</font></td>
+						    <td> <font color="green">修改appcode，自动修改commandcode业务对应的appcode</font>  
+						    </td>          
+						</tr> 
+						<tr>
+							<td><font color="red">优化：不同appcode所对应的索引路径判断</font></td>
+						    <td> <font color="green">系统限制不同appcode不能使用相同索引路径</font>  
+						    </td>          
+						</tr> 
+						<tr>
+							<td><font color="red">功能：索引创建速度日志</font></td>
+						    <td> <font color="green">增加索引创建速度日志，默认保留30天的日志</font>  
+						    </td>          
+						</tr> 
+						<tr>
+							<td><font color="red">功能：appcode接入应用索引创建进度监控-页面进度条</font></td>
+						    <td> <font color="green">appcode接入应用索引创建进度监控-页面进度条</font>  
+						    </td>          
+						</tr> 
+						<tr>
+							<td><font color="red">功能：command业务索引创建进度监控-页面进度条</font></td>
+						    <td> <font color="green">command业务索引创建进度监控-页面进度条</font>  
+						    </td>          
+						</tr>
+						<tr>
+							<td><font color="red">功能：自动备份lucene_tables配置库</font></td>
+						    <td> <font color="green">自动备份lucene_tables配置库，每天备份一次在lucene_tables_bak下</font>  
+						    </td>          
+						</tr>
+						<tr>
+							<td><font color="red">功能：近时搜索，默认五秒刷新到索引库</font></td>
+						    <td> <font color="green">近时搜索，默认五秒刷新到索引库，如有舒服刷新后通知searchweb的搜索reopen</font>  
+						    </td>          
+						</tr>
+						<tr>
+							<td><font color="red">功能：增加默认接入应用productdemo</font></td>
+						    <td> <font color="green">搜索系统启动后会自动创建一个接入应用,可供演示，学习等</font>  
+						    </td>          
+						</tr>
+						<tr>
+							<td> <font color="red">功能：searchweb增加demo，以供学习功能</font></td>
+						    <td> <font color="green">1普通查询功能演示demo</font>   
+						      <font color="green">2推送信息功能demo</font> 
+						      <font color="green">3分组查询信息demo</font> 
+						      <font color="green">4检查接入应用数据查询功能</font>    
+						      <font color="green">5帮助以及api详细信息</font>  </td>  
+						             
+						</tr>
+					</table>
+				</th>
+				</tr>
+				<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.8.2版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+					<table>
+						<tr>
+							<td><font color="red">可选择分词器类型</font></td>
+						    <td> <font color="green">根据接入应用选择的分词器类型创建索引、查询索引等</font>  
+						    </td>          
+						</tr> 
+					</table>
+				</th>
+				</tr>
+				<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.8.1版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+					<table>
+						<tr>
+							<td><font color="red">一个字段属于多个command</font></td>
+						    <td> <font color="green">即同一个应用下，若多个commandCode，可存在相同属性的字段【注：不同commandcode的相同字段名，一定要类型全一致，智能提示字段 一个commandcode只能有一个】</font>  
+						    </td>          
+						</tr> 
+					</table>
+				</th>
+				</tr>
+				<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.8版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.增加用户管理</font></td>
+			    <td> <font color="green">实现登陆，添加账户功能，对用户有权限限制，不同用户可分配不同appcode</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">2.搜索分析</font></td>
+			    <td> <font color="green">新增搜索分析模块，可监控用户搜索行为，分析出喜好及热衷词。各种维度统计</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">3.同义词管理</font></td>
+			    <td> <font color="green">设置同义词，可以根据设置词进行联合或关系查询</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">4.推荐管理</font></td>
+			    <td> <font color="green">根据appcode和commandcode设置推荐词，类似置顶用，推广活动等</font>  
+			    </td>          
+				</tr>  
+				<tr>
+				<td><font color="red">5.新增字段描述-URL类型</font></td>
+			    <td> <font color="green">此时searchweb工程需要开通外网，或者这个链接（xxx/xxx/link.wap?url=跳转的url）。该类型是要跳转的url数据，类似百度要跳转到的目标url。进行用户行为分析，配合后台搜索分析用</font>  
+			    </td>          
+				</tr>  
+				<tr>
+				<td><font color="red">6.使用新功能-推荐、同义词。需要用新版本的client的jar包</font></td>
+			    <td> <font color="green">客户端api需要search-client-1.8.0.0-SNAPSHOT.jar</font>  
+			    </td>          
+				</tr> 
+				</table>
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.7版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.增加js客户端api</font></td>
+			    <td> <font color="green">实现js客户端调用搜索api，</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">2.错别字纠正，例如：“中果”提示“中国”</font></td>
+			    <td> <font color="green">客户端api需要search-client-1.7.0.0-SNAPSHOT.jar</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">3.智能搜索增加新的type方式</font></td>
+			    <td> <font color="green">page.setType("MTC")M:支持中间分词查询，T传入参数按照拼音再搜索，C错别字修正</font>  
+			    </td>          
+				</tr> 
+				 
+				</table>
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.6版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.高亮显示优化</font></td>
+			    <td> <font color="green">在某个字段没有关键词显示的时候，也要返回字段值</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">2.数据库视图支持sqlserver</font></td>
+			    <td> <font color="green">支持了数据库sqlserver</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">3.增加int排序类型</font></td>
+			    <td> <font color="green">以前版本只支持String排序，此版本支撑Int类型排序</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">4.热词优化</font></td>
+			    <td> <font color="green">修改了热词问题</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">5.优化数据库连接段掉问题</font></td>
+			    <td> <font color="green">在数据库连接不上的时候，不会删除索引库，导致前台不能搜索</font>  
+			    </td>          
+				</tr> 
+				 
+				</table>
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.5版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.兼容weblogic版本</font></td>
+			    <td> <font color="green">部署在weblogic环境时，删除xml-apis-1.0.b2.jar</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">2.修复重新启用没有验证问题</font></td>
+			    <td> <font color="green">修复删除主键，依然可以重新启用的bug</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">3.修复索引字段名称不支持数字的bug</font></td>
+			    <td> <font color="green">修复索引字段名称不支持数字的bug</font>  
+			    </td>          
+				</tr> 
+				</table>
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.4版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.修复修改会删除appbug：</font></td>
+			    <td> <font color="green">修复修改应用会删除应用的问题</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">2.索引数据配置不能重复：</font></td>
+			    <td> <font color="green">索引数据配置在同一应用业务下不能重复</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">3.智能提示增加搜索条件：</font></td>
+			    <td> <font color="green">设置page3.setQueryStr(" SHOP_NAME:林* AND ")增加搜索条件</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">4.智能分词：</font></td>
+			    <td> <font color="green">增加拼音分词</font>  
+			    </td>          
+				</tr> 
+				<tr>
+				<td><font color="red">5.查询排序：</font></td>
+			    <td> <font color="green">按照搜索字段进行全匹配后按照排序字段排序,剩下不是全匹配的按照排序字段排在全匹配的后面</font>  
+			    </td>          
+				</tr> 
+				</table>
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.3版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.增加按照得分排序：</font></td>
+			    <td> <font color="green">搜索客户端增加按照得分排序api</font>  
+			    </td>          
+				</tr> 	 
+				<tr>
+				<td><font color="red">2.后台配置实现物理删除，解决重启问题：</font></td>
+			    <td> <font color="green">配置信息等，实现物理删除，由于逻辑删除导致重启问题得已解决</font>    </td>
+				</tr>
+				 </table> 
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.2版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.增加分组搜索功能：</font></td>
+			    <td> <font color="green">可以按照搜索内容根据某个字段进行分组功能，例如：按照简介搜索“美观大方”依照“分类”字段进行分组</font>  
+			    </td>          
+				</tr> 	 
+				<tr>
+				<td><font color="red">2.放开搜索配置修改功能：</font></td>
+			    <td> <font color="green">searchH可以更改配置信息-传递特殊标记&method=edit可进行修改，修改最好重启服务</font>    </td>
+				</tr>
+				 </table> 
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.1.1版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.死循环不创建索引bug：</font></td>
+			    <td> <font color="green">修改视图和索引项不匹配导致不创索引，死循环</font>  
+			    </td>          
+				</tr> 	 
+				<tr>
+				<td><font color="red">2.假删除增加查询条件：</font></td>
+			    <td> <font color="green">由于接入app应用是采取的假删除，导致读取错误信息，修正为查询时候增加删除过滤条件</font>    </td>
+				</tr>
+				 </table> 
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.1版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr>
+				<td><font color="red">1.增加索引数据源：</font></td>
+			    <td> <font color="green">增加索引创建来源A. FTP文件接口 B.服务接口</font> 
+			    </td>          
+				</tr> 	 
+				<tr>
+				<td><font color="red">2.NOsql：</font></td>
+			    <td> <font color="green">部署不依赖数据库，利用luncene当做数据</font> 
+				</tr>
+				<tr>
+				<td><font color="red">3.查询参数：  </font></td>
+			    <td> <font color="green">搜索api可以根据appcode和多个commandcode进行查询索引库</font>
+			          <br>
+			          <font color="red">LucenePage page1 =new LucenePage("shitu",new String[]{"shitu"});</font>
+			    </td>          
+				</tr>  
+				<tr>
+				<td><font color="red">4.索引字段增加智能提示类型：</font></td>
+			    <td> <font color="green">后台索引库字段配置增加智能提示类型，可以按照简拼全拼或首字母进行智能提示</font>          
+			     </td>          
+				</tr>	 
+				 </table> 
+				</th>
+			</tr>
+			<tr>
+				<th align="right" style="width: 180px;" class="bg_eb">
+					<font size="4">搜索中心1.0版本</font>
+				</th>
+				<th align="left" class="bg_f7">
+				<table>
+				<tr><td>功能点：</td>
+					<td>描述</td>
+				</tr> 
+				<tr>
+				<td><font color="red">1.搜索接入应用：</font></td>
+			    <td> <font color="green">提供 接入搜索中心系统的注册功能，根据注册的appcode可以调用搜索服务api</font> 
+			    <br><img src="help/101.png" width="85%"/>
+			    </td>          
+				</tr> 	 
+				<tr>
+				<td><font color="red">2.新增业务数据：</font></td>
+			    <td> <font color="green">每个接入的appcode应用可以维护一个或多个业务模块即commandcode</font> 
+			    <br><img src="help/102.png" width="85%"/></td>          
+				</tr>
+				<tr>
+				<td><font color="red">3.业务索引字段配置：</font></td>
+			    <td> <font color="green">维护一个或多个业务模块即commandcode的索引数据字段配置</font> 
+			        <br><img src="help/103.png" width="85%"/>   
+			   </td>          
+				</tr>	
+				<tr>
+				<td><font color="red">4.搜索日志查询：</font></td>
+			    <td> <font color="green">查询搜索的热词记录 </font>          
+				 <br><img src="help/104.png" width="85%"/>   
+			     </td>          
+				</tr>	 
+				<tr>
+				<td><font color="red">5.数据字典配置：</font></td>
+			    <td> <font color="green">数据字典配置，主要提供联想词和违禁词配置 </font>
+			    <br><img src="help/105.png" width="85%"/> </td>          
+				</tr>		 
+				<tr>
+				<td><font color="red">6.索引数据源：</font></td>
+			    <td> <font color="green">索引数据源提供视图和推送两种方式</font></td>          
+				</tr>	 
+				<tr>
+				<td><font color="red">7.程序部署依赖数据库： </font></td>
+			    <td> <font color="green">程序运行需要数据库依赖</font></td>          
+				</tr> 
+				<tr>
+				<td><font color="red">8.查询参数：  </font></td>
+			    <td> <font color="green">搜索api只能根据appcode和commandcode进行查询索引库</font>
+			          <br>
+			          <font color="red">LucenePage page1 =new LucenePage("shitu","shitu");</font>
+			           <br>
+			           <br>
+			           <br>
+			    </td>          
+				</tr>  
+				<tr>
+				<td><font color="red">9.搜索服务负载：  </font></td>
+			    <td><font color="green">在单节点下可以提供可配置多个搜索实例提高性能--(/searchweb/WEB-INF/classes/searchweb.properties)</font>
+			    <br><img src="help/109.jpg" width="85%"/> </td>            
+				</tr> 
+				 </table> 
+				</th>
+			</tr>
+		</tbody></table>
+	</div>
+	 
+</div>
+
+ </body>
+</html>

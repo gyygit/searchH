@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.sinovatech.search.entity.SearchKeywordLogDTO"  table="SEARCH_KEYWORD_LOG" >
+ <comment>搜索日志表</comment>
+  <id name="id"  type="java.lang.String" >
+  <column  name="ID"  length="32"  />
+  <generator class="uuid.hex" />
+ </id>
+    <property  name="appCode"  type="java.lang.String" >
+     <column  name="APP_CODE"  length="50" >
+         <comment>业务应用编码</comment>
+     </column>
+   </property>
+    <property  name="commandCode"  type="java.lang.String" >
+     <column  name="COMMAND_CODE"  length="100" >
+         <comment>业务数据分类编码</comment>
+     </column>
+   </property>
+    <property  name="searchKeyword"  type="java.lang.String" >
+     <column  name="SEARCH_KEYWORD"  length="200" >
+         <comment>搜索词</comment>
+     </column>
+   </property>
+    <property  name="searchPinyin"  type="java.lang.String" >
+     <column  name="SEARCH_PINYIN"  length="400" >
+         <comment>搜索词全拼音</comment>
+     </column>
+   </property>
+    <property  name="searchPy"  type="java.lang.String" >
+     <column  name="SEARCH_PY"  length="200" >
+         <comment>搜索词简拼音</comment>
+     </column>
+   </property>
+ <property  name="createTime"  type="java.util.Date" >
+   <column  name="CREATE_TIME"  >
+   <comment>搜索时间</comment>
+   </column>
+  </property>
+  </class>
+</hibernate-mapping>
+ 
+

@@ -1,0 +1,12 @@
+# netbeans temp & private files
+target/
+# Eclipse Files
+.project
+.classpath
+.settings/
+WEB-INF/classes/
+.mymetadata
+.tomcatplugin
+ 
+searchH/src/main/webapp/WEB-INF/classes/
+/bin/

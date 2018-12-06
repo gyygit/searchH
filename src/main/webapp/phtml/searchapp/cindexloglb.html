@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../common/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/mianBox.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/pagination.css" />
+
+<script src="../common/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../common/datePicker/WdatePicker.js"></script>
+<script src="../common/js/jquery-jtemplates.js"></script>
+<script src="../common/js/title.js" type="text/javascript"></script>
+<script src="../common/js/public.js" type="text/javascript"></script>
+<script src="../common/js/commonBase.js" type="text/javascript"></script>
+<script src="../common/js/jquery.pagination.js" type="text/javascript"></script>
+<script src="../common/js/splitPage.js" type="text/javascript"></script>
+<script src="../common/js/ajaxSetupSet.js" type="text/javascript"></script>
+<script src="../js/cindexloglist.js" type="text/javascript"></script>
+</head>
+<body class="bg_cff">
+<div class="leftDiv" id="leftDiv">
+</div>
+<div class="mainBox">
+<div class="route"><span>应用业务</span>&nbsp;&gt;&nbsp;<span>创建索引库日志查询</span>
+<<span id="verspan">	</span>
+ </div>
+ 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb_searchbox mt20 bord_gray">
+      <tr>
+        <td align="right">时间：&nbsp;</td>
+        <td>	 <input type="text" class="date_inp1" name="tab_startTime" id="tab_startTime" value="" style="margin-left:0;" onfocus="WdatePickerSsSetup('tab_startTime','yyyy-MM-dd')" readonly="true">
+            	至<input type="text" class="date_inp1" name="tab_endTime" id="tab_endTime" value=""  onfocus="WdatePickerSsSetup('tab_endTime','yyyy-MM-dd')" readonly="true"> 
+        </td>
+        <td align="right">应用编码：&nbsp;</td>
+        <td><input name="tab_appcode" id="tab_appcode" type="text" class="input_normal w160"/></td>
+        <td align="right">业务code：&nbsp;</td>
+        <td><input name="tab_commandcode" id="tab_commandcode" type="text" class="input_normal w160"/></td>
+        <td><a href="javascript:;" onClick="QueryMain.cleanSearch()"; class="bt_blue"><span>清空</span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" onClick="$('#pageNo').val('1');cindexlogList.query();"; class="bt_blue"><span>查询</span></a></td>
+      </tr>
+       
+    </table>
+    <br>
+  	<table width="100%" style="border:1px solid #e3e3e3;" id="result" class="tb_content1"></table>
+    <textarea id="templateContainer" style="display: none;"> 
+	      <tr>
+	        <th>时间</th>
+	        <th>应用编码</th>
+	        <th>业务编码</th>
+	        <th>当前创建页数</th>
+	        <th>总页数</th>
+	        <th>正在创建的库</th>
+	        <th>错误信息</th>
+	      </tr>
+ 
+      {#foreach $T.list as row}
+	      <tr>
+	        <td>{$T.row.cdate}</td>
+	        <td>{$T.row.appcode}</td>
+	        <td>{$T.row.commandcode}</td>
+	        <td>{$T.row.cpage}</td>
+	        <td>{$T.row.totalpage}</td>
+	        <td>{$T.row.ku}</td>
+	        <td>{$T.row.errinfo}</td>
+	      </tr>
+      {#/foreach}
+    </textarea>
+</div> 
+ 
+<div id="nextPage" style="display: none"></div>
+<input type="hidden" id="pageNo" value="1" />
+<input type="hidden" id="flag"/>
+</body>
+<!-- 分页处理开始 -->
+<input type="hidden" id="pageNo"   name="pageNo"  value="1" />
+<div id="Pagination">
+</div>
+
+<script>
+
+function WdatePickerSsSetup(ctrId){  
+			WdatePicker({el:''+ctrId,skin:'default',dateFmt:'yyyy-MM-dd'});
+			return false;
+		}
+		function WdatePickerSsSetup(ctrId,fmt){  
+			WdatePicker({el:''+ctrId,skin:'default',dateFmt:''+fmt});
+			return false;
+		}
+		
+		function WdatePickerMinSetup(ctrId,beforeId){
+			var min = document.getElementById(beforeId).value;
+			if(min == ""){
+				alert("\u8bf7\u9009\u62e9\u521b\u5efa\u65f6\u95f4");
+				return;
+			}
+			WdatePicker({el:''+ctrId,skin:'default',minDate:min});
+			return false;
+		}
+		
+		function WdatePickerMinFmtSetup(ctrId,beforeId,fmt){
+			var min = document.getElementById(beforeId).value;
+			if(min == ""){
+				alert("\u8bf7\u9009\u62e9\u521b\u5efa\u65f6\u95f4");
+				return;
+			}
+			WdatePicker({el:''+ctrId,skin:'default',minDate:min,dateFmt:''+fmt});
+			return false;
+		}
+		
+		function WdatePickerChangeSetup(ctrId,beforeId){
+			var min = document.getElementById(beforeId).value;
+			if(min == ""){
+				alert("\u8bf7\u9009\u62e9\u521b\u5efa\u65f6\u95f4");
+				return;
+			}
+			WdatePicker({el:''+ctrId,skin:'default',minDate:min,onpicking:function(dp){if(!confirm('\u539f\u6765\u4e0a\u7ebf\u65f6\u95f4\u4e3a: '+dp.cal.getDateStr()+', \u8981\u7528\u65b0\u4e0a\u7ebf\u65f6\u95f4:' + dp.cal.getNewDateStr() + '\u8986\u76d6\u5417?')) return true;}});
+		}
+</script>
+
+</html>

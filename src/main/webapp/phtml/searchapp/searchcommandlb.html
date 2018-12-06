@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../common/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/mianBox.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/pagination.css" />
+
+<script src="../common/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="../common/js/jquery-jtemplates.js"></script>
+<!--<script src="../common/js/jquery.simplemodal.1.4.3.min.js"></script>
+--><script src="../common/js/title.js" type="text/javascript"></script>
+<script src="../common/js/public.js" type="text/javascript"></script>
+<script src="../common/js/commonBase.js" type="text/javascript"></script>
+<script src="../js/searchcommandlist.js" type="text/javascript"></script>
+<script src="../common/js/jquery.pagination.js" type="text/javascript"></script>
+<script src="../common/js/splitPage.js" type="text/javascript"></script>
+<script src="../common/js/ajaxSetupSet.js" type="text/javascript"></script>
+</head>
+<body class="bg_cff">
+<div class="leftDiv" id="leftDiv">
+</div>
+<div class="mainBox">
+<div class="route"><span>应用业务</span>&nbsp;&gt;&nbsp;<span>业务数据类型管理</span></div>
+
+	 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb_searchbox mt20 bord_gray">
+      <tr>
+        <td align="right">业务数据分类编码：&nbsp;</td>
+        <td><input name="tab_commandCode" id="tab_commandCode" type="text" class="input_normal w160"/></td>
+        <td align="right">业务数据类型编码：&nbsp;</td>
+        <td><input name="tab_commandName" id="tab_commandName" type="text" class="input_normal w160"/></td>
+        <td align="right">视图名称：&nbsp;</td>
+        <td><input name="tab_viewName" id="tab_viewName" type="text" class="input_normal w160"/></td>
+        
+         <input type="hidden" id="jisuanappcode" value="" />
+      </tr>
+      <tr>
+        <td colspan="6" align="right"><p class="mr20">
+        <a href="javascript:;" onClick="QueryMain.cleanSearch()"; class="bt_blue"><span>清空</span></a>&nbsp;&nbsp;&nbsp;
+        <a href="javascript:;" onClick="$('#pageNo').val('1');searchCommonList.query();"; class="bt_blue"><span>查询</span></a>&nbsp;&nbsp;&nbsp;
+        <a href="/searchH/phtml/searchapp/searchapplb.html" class="mr10 bt_blue"><span>返回应用业务管理</span></a></p></td>
+      </tr>
+    </table>
+    
+    <p class="overflow text_r mt10">
+    	<a href="javascript:add();" class="bt_blue ml20"><span>新增业务数据类型</span></a>
+    	<a href="javascript:;" class="bt_blue ml10" onclick="QueryMain.btn_delete_click('/searchCommand/deleteSearchCommand.wap')"><span>批量删除</span></a>
+    </p>
+  	<table width="100%" style="border:1px solid #e3e3e3;" id="result" class="tb_content1"></table>
+    <textarea id="templateContainer" style="display: none;"> 
+      <tbody>
+	      <tr class="aaaa" align="center">
+	        <th width="30"><input type="checkbox" class="checkedAll" onclick="QueryMain.checkAll();"name="items1" /></th> 
+	        <th>业务数据分类名称</th> 
+	        <th>业务数据类型编码<input type="hidden" id="hidden_appId" value="{$T.app_id}" /></th> 
+	                       
+	        
+	       
+	        {#if $T.indexType == "2"}
+		        <th>视图名称</th>
+		        <th  width="30%">索引进度</th> 
+	        {#/if}
+	        {#if $T.indexType != "2"}
+	        <th>用户名</th> 
+	        <th>链接地址</th>
+	        {#/if}
+	        {#if $T.indexType == "3"}
+	        <th>ftp类型</th>
+	        <th>本地存储地址</th>
+	        <th>远程存储文件夹</th>
+	        {#/if}
+	        <th>注册时间</th>
+	        <th>修改时间</th>
+	        <th>操作人</th>
+	        <th>操作</th>
+	      </tr> 
+      {#foreach $T.list as row}
+	      <tr class="aaaa" align="center">
+	        <td><input type="checkbox" name="items" value="{$T.row.id}" onclick="QueryMain.checkPart();"/></td>
+	        <td>{$T.row.commandName == "" ? "--":$T.row.commandName}</td>
+	        <td>{$T.row.commandCode}</td>
+	        {#if $T.indexType == "2"}
+	        <td>{$T.row.viewName == "null" ? "--":$T.row.viewName}</td>
+	        {#/if}
+	        <td>
+	             <table width="100%">
+		      		<tr width="100%">
+		      		    <td width="10%"><span id="percent-ku-A{$T.row.commandCode}"></span>库</td>
+		      		    <td width="10%">时间:<span id="percent-date-A{$T.row.commandCode}"></span></td>
+		      		    <td width="10%">耗时:<span id="percent-haoshi-A{$T.row.commandCode}"></span>秒</td>
+		      			<td width="70%">
+		     				 <div class="progress">
+		        				<div id="progress-bar-A{$T.row.commandCode}" class="progress-bar"  role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="200">
+	            					<span id="percent-A{$T.row.commandCode}">0%</span>
+	         		 			</div>
+	         				</div>
+	         			</td>
+	         	  </tr>
+	         	  <tr>
+	         	  		<td width="5%"><span id="percent-ku-B{$T.row.commandCode}"></span>库</td>
+	         	  		<td width="25%">时间:<span id="percent-date-B{$T.row.commandCode}"></span></td> 
+	         	  		<td width="15%">耗时:<span id="percent-haoshi-B{$T.row.commandCode}"></span>秒</td>
+	         	  		<td>
+	         		  		 <div class="progress">
+	         		 			<div id="progress-bar-B{$T.row.commandCode}" class="progress-bar"  role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="200">
+	            					<span id="percent-B{$T.row.commandCode}">0%</span>
+	         					</div>
+	         		 		</div>
+	         		 	</td>
+	         	</tr>
+	         </table>
+	        </td>
+	        
+	        
+	        
+	        {#if $T.indexType != "2"}
+	        <td>{$T.row.userName == "null" ? "--":$T.row.userName}</td>
+	        <td>{$T.row.linkAddress == "null" ? "--":$T.row.linkAddress}</td>
+	        {#/if}
+	        {#if $T.indexType == "3"}
+	         <td>{$T.row.ftpType == "1" ? "ftp" : "sftp" } </td>
+	         <td>{$T.row.localAddress }</td>
+	         <td>{$T.row.linkDir }</td>
+	        {#/if}
+	        <td>{$T.row.createTime != null ? $T.row.createTime:"--"}</td>
+	        <td>{$T.row.updateTime != null ? $T.row.updateTime:"--"}</td>
+	        <td>{$T.row.operator}</td>
+	        <td>
+	        	<a href="/searchH/phtml/searchapp/searchcommand.html?id={$T.row.id}&appId={$T.app_id}" class="ml10">编辑</a><a href="javascript:QueryMain.btn_delete_click('/searchCommand/deleteSearchCommand.wap','{$T.row.id}','{$T.row.commandName}');" class="ml10" >删除</a>
+	        	<a href="javascript:toSearchLucene('{$T.state}','{$T.row.id}','{$T.app_id}');" class="ml10">索引查询</a><a href="javascript:toSearchLucenehot('{$T.state}','{$T.row.id}','{$T.app_id}');" class="ml10">热词查询</a>
+	        </td> 
+	      </tr> 
+      {#/foreach}
+    </tbody>
+    </textarea>
+</div>
+<div id="nextPage" style="display: none"></div>
+<input type="hidden" id="pageNo" value="1" />
+<input type="hidden" id="flag"/>
+</body>
+<!-- 分页处理开始 -->
+<input type="hidden" id="pageNo"   name="pageNo"  value="1" />
+<div id="Pagination">
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var map = getUrlParams();
+	var flag = map.get("app_id");
+	if(flag!=null&&flag!=''){
+		$("#flag").val(flag);
+	}
+});
+function add(){
+	location.href="/searchH/phtml/searchapp/searchcommand.html?appId="+document.getElementById('hidden_appId').value;
+}
+function toSearchLucene(appStatus, id, appid){
+	//if(appStatus != "1")
+	//	alert("应用处在停止状态，请先启用应用！");
+	//else
+		location.href="/searchH/phtml/searchapp/lucenesearch.html?commandId=" + id+"&app_id="+appid;
+}
+function toSearchLucenehot(appStatus, id, appid){
+	//if(appStatus != "1")
+	//	alert("应用处在停止状态，请先启用应用！");
+	//else
+		location.href="/searchH/phtml/searchapp/lucenesearchhot.html?commandId=" + id+"&app_id="+appid;
+}
+
+</script>
+</html>

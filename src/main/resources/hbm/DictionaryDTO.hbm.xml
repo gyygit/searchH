@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.sinovatech.search.entity.DictionaryDTO"  table="DICTIONARY" >
+ <comment>数据字典子表</comment>
+  <id name="id"  type="java.lang.String" >
+  <column  name="ID"  length="32"  />
+  <generator class="uuid.hex" />
+ </id>
+    <property  name="indexId"  type="java.lang.String" >
+     <column  name="INDEX_ID"  length="32" >
+         <comment>主表ID</comment>
+     </column>
+   </property>
+    <property  name="indexcode"  type="java.lang.String" >
+     <column  name="INDEXCODE"  length="80" >
+         <comment>主表编码</comment>
+     </column>
+   </property>
+    <property  name="code"  type="java.lang.String" >
+     <column  name="CODE"  length="80" >
+         <comment>编码</comment>
+     </column>
+   </property>
+    <property  name="name"  type="java.lang.String" >
+     <column  name="NAME"  length="80" >
+         <comment>名称</comment>
+     </column>
+   </property>
+    <property  name="value"  type="java.lang.String" >
+     <column  name="VALUE"  length="500" >
+         <comment>值</comment>
+     </column>
+   </property>
+    <property  name="description"  type="java.lang.String" >
+     <column  name="DESCRIPTION"  length="100" >
+         <comment>描述</comment>
+     </column>
+   </property>
+    <property  name="dictionaryImgUrl"  type="java.lang.String" >
+     <column  name="DICTIONARY_IMG_URL"  length="200" >
+         <comment>图片地址</comment>
+     </column>
+   </property>
+    <property  name="status"  type="java.lang.String" >
+     <column  name="STATUS"  length="1" >
+         <comment>状态1启用2停用</comment>
+     </column>
+   </property>
+ <property  name="updatetime"  type="java.util.Date" >
+   <column  name="UPDATETIME"  >
+   <comment>更新时间</comment>
+   </column>
+  </property>
+ <property  name="sort"  type="java.lang.Long" >
+   <column  name="SORT"  >
+   <comment>排序</comment>
+   </column>
+  </property>
+  </class>
+</hibernate-mapping>
+ 
+

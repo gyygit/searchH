@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-merge="false" default-dependency-check="none"
+	default-autowire="no" default-lazy-init="false">
+
+
+	<!-- <bean id="jedisHelper" class="com.sinovatech.search.utils.JedisHelper">
+		<property name="jedisPool" ref="jedisPool" />
+		<property name="hashCodeNum" value="120" />
+	</bean> -->
+
+	<!-- <bean id="jedisPool" class="redis.clients.jedis.ShardedJedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1">
+			<ref bean="jedis.shardInfo" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="jedis.shardInfo" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg index="0" value="${redis_ip}" />
+		<constructor-arg index="1" value="${redis_port}" type="int" />
+		<constructor-arg index="2" value="${redis_timeout}"
+			type="int" />
+	</bean> -->
+
+	<!--<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxActive" value="300" />
+		<property name="maxIdle" value="100" />
+		<property name="maxWait" value="100000" />
+		<property name="testOnBorrow" value="true" />
+	</bean>-->
+
+</beans>

@@ -1,0 +1,234 @@
+.eXtremeTable {
+	margin: 0;
+	padding: 0;
+}
+.eXtremeTable .compactToolbar a span{
+	color: #2274AC;
+	text-decoration: underline;
+}
+
+.eXtremeTable .compactToolbar button{
+	font-size: 12px;
+	font-weight: normal;
+	background: none;
+	color: #2274AC;
+	text-decoration: underline;
+	border: none;
+	padding: 1px;
+}
+.eXtremeTable select {
+	font-size: 12px;
+	border: solid 1px #EEE;
+	width: 75px;
+	background: #fff;
+	border: 1px inset #fff;
+}
+
+.eXtremeTable .tableRegion {
+	border: 1px solid silver;
+	padding: 0px;
+	font-size: 12px;
+	margin-top: 7px;
+}
+
+.eXtremeTable .filter {
+	background-color: #F4F4F4;
+}
+
+.eXtremeTable .filter td {
+	padding: 2px;
+}
+
+.eXtremeTable .title {
+	color: #444444;
+	font-weight: bold;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+.eXtremeTable .titleRow {
+	background: #6699cc;
+}
+
+.eXtremeTable .titleRow td {
+	border-bottom: 1px solid #308dbb;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.eXtremeTable .titleRow span {
+	color: #fff;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.eXtremeTable .filter input {
+	font-size: 12px;
+	border: 1px solid inset;
+	padding: 1px 1px 1px 1px;
+	width: 99%;
+	background-image: url("../images/filter_bg.gif");
+	background-position: right center;
+	background-repeat: no-repeat;
+	border: 1px inset #fff;
+}
+
+.eXtremeTable .filter select {
+	font-size: 12px;
+	border: inset 1px #fff;
+	width: 100%;
+	background: #fff;
+	
+}
+
+.eXtremeTable .tableHeader {
+	color: #777;
+	font-size: 13px;
+	font-weight: bold;
+	padding-right: 3px;
+	padding-left: 3px;
+	padding-top: 1px;
+	padding-bottom: 2px;
+	margin: 0px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-color: #fff;
+	/*background: url("../images/tab_1_bg.gif") repeat-x;*/
+	background-color:#F4F4F4;
+	height: 20px;
+	line-height: 20px;
+}
+
+.eXtremeTable .tableHeaderSort {
+	background-color: #E1E9F8;
+	color: #222;
+	font-size: 13px;
+	font-weight: bold;
+	padding-right: 3px;
+	padding-left: 3px;
+	padding-top: 1px;
+	padding-bottom: 2px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-color: white;
+	height: 20px;
+	line-height: 20px;
+}
+
+
+
+.eXtremeTable .odd a, .even a {
+	color: #2274AC;
+	font-size: 12px;
+}
+
+.eXtremeTable .odd td, .eXtremeTable .even td, .highlight td{
+	padding:0px 3px;
+	vertical-align: middle;
+	font-size: 12px;
+	height: 25px;
+	line-height: 25px;
+}
+
+.eXtremeTable .odd {
+	background-color: #FFFFFF;
+}
+
+.eXtremeTable .even {
+  	/*background-color: #FCFCF9;*/
+  	background-color: #F5FFFA;
+}
+
+.eXtremeTable td{
+	border-bottom: 1px solid #f0f0f0;
+	border-right: 1px solid #f0f0f0;
+	height: 25px;line-height: 25px;
+}
+
+.eXtremeTable .highlight td {
+	background-color: #fdecae;
+}
+
+
+.eXtremeTable .compactToolbar {
+	background-color: #F4F4F4;
+}
+
+.eXtremeTable .toolbar {
+	background-color: #F4F4F4;
+	font-size: 12px;
+	margin-right: 1px;
+	border-right: 1px solid silver;
+	border-left: 1px solid silver;
+	border-top: 1px solid silver;
+	border-bottom: 1px solid silver;
+}
+
+.eXtremeTable .toolbar a:hover {
+	background-color: transparent;
+}
+
+.eXtremeTable .toolbar td {
+	color: #444444;
+	padding: 0px 3px 0px 3px;
+	text-align:center;
+}
+
+.eXtremeTable .separator {
+	width: 7px;
+}
+
+.eXtremeTable .statusBar {
+	background-color: #F4F4F4;
+	font-size: 12px;
+	height: 25px;
+	line-height: 25px;
+	text-align: left;
+	padding-left: 5px;
+}
+
+.eXtremeTable .filterButtons {
+	background-color: #F4F4F4;
+	text-align: right;
+}
+
+.eXtremeTable .title span {
+	margin-left: 7px;
+}
+
+.eXtremeTable .formButtons {
+	display: block;
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+.eXtremeTable .formButton {
+	cursor: pointer;
+	font-size:12px;
+	font-weight: bold;
+	background-color: #308dbb;
+	color: white;
+	margin-top: 5px;
+	border: outset 1px #333;
+	vertical-align: middle;
+}
+
+.eXtremeTable .calcRow {
+	background-color: #F4F4F4;
+}
+
+.eXtremeTable .calcTitle {
+	background-color: #F4F4F4;
+	color: black;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.eXtremeTable .calcResult {
+	background-color: #F4F4F4;
+	color: black;
+}
+
+

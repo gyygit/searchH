@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../common/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/mianBox.css"/>
+<link rel="stylesheet" type="text/css" href="../common/css/pagination.css" />
+<script src="../common/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="../common/js/jquery-jtemplates.js"></script>
+<!--<script src="../common/js/jquery.simplemodal.1.4.3.min.js"></script>
+--><script src="../common/js/title.js" type="text/javascript"></script>
+<script src="../common/js/public.js" type="text/javascript"></script>
+<script src="../common/js/commonBase.js" type="text/javascript"></script>
+<script src="../js/dictionary.js" type="text/javascript"></script>
+<script src="../common/js/jquery.pagination.js" type="text/javascript"></script>
+<script src="../common/js/splitPage.js" type="text/javascript"></script>
+<script src="../common/js/ajaxSetupSet.js" type="text/javascript"></script>
+</head>
+<body class="bg_cff">
+<div class="leftDiv" id="leftDiv">
+</div>
+<div class="mainBox">
+<div class="route"><span>数据字典主表</span>&nbsp;&gt;&nbsp;<span>数据字典子表管理</span>&nbsp;&gt;&nbsp;<span>新增/编辑</span></div>
+<div id="content"></div>
+<textarea id="dictionary_template" style="display: none"> 
+  <input type="hidden" id="tab_id"   name="tab_id"  value="{$T.m.id}" />
+  <input type="hidden" id="tab_indexId" name="tab_indexId" value="{$T.indexId}" class="text_1"/>
+   		<input type="hidden" id="tab_indexcode" name="tab_indexcode" value="{$T.m.indexcode}" class="text_1"/>		
+   
+    
+    
+    <div class="mt10 mb10"><a href="/searchH/phtml/searchapp/dictionarylb.html?index_id={$T.indexId}" class="mr10 bt_blue"><span>返回</span></a><a href="javascript:dictionary.save();" class="mr10 bt_blue" ><span>保存</span></a></div>
+    <div class="bord_gray padd_10 pb30">
+    	<p class="lineh40 borb font16"><span>创建信息</span><img src="../common/images/xl.gif" class="ml10" /></p>
+	
+        <div class="mt10">
+        	<p class="fl leftName middle"><span class="red ml10">*</span><span>子表code：</span></p>
+              <div class="fl rightInfo middle">         
+            {#if $T.m.id != ""}
+              <input type="hidden" id="tab_code" name="tab_code" value="{$T.m.code}" class="text_1"/>{$T.m.code}                 
+              {#else}
+              <input type="text" id="tab_code" name="tab_code" value="{$T.m.code}" maxlength="80" class="text_1"/>                     
+              <span class="red ml10">*保存后，不能修改</span>
+              {#/if}</div>
+           
+            <div class="clear"></div>
+            </div>
+            <div class="mt10">
+        	<p class="fl leftName middle"><span class="red ml10">*</span><span>名称：</span></p>
+            <div class="fl rightInfo middle">
+            {#if $T.m.id != ""}
+            <input type="hidden" id="tab_name" name="tab_name" value="{$T.m.name}" class="text_1"/>{$T.m.name}                 
+            {#else}
+            <input type="text" id="tab_name" name="tab_name" value="{$T.m.name}" maxlength="80" class="text_1"/>                    
+            <span class="red ml10">*保存后，不能修改</span>
+           {#/if} </div>          
+            <div class="clear"></div>
+            <div class="mt10">
+        	<p class="fl leftName middle"><span class="red ml10">*</span><span>值：</span></p>
+            <div class="fl rightInfo middle">
+            	<div contentEditable="true" id="tab_value" name="tab_value" style="word-wrap: break-word; break-word: break-all; overflow-y:auto; width:386px; height:65px; border:1px solid #ddd;">{$T.m.value}</div>
+            </div><div class="clear"></div>
+        </div>
+     
+        </div>
+             <div class="mt10">
+        	<p class="fl leftName middle"><span>描述：</span></p>
+              <div class="fl rightInfo middle"><input type="text" id="tab_description" name="tab_description" value="{$T.m.description}" maxlength="100" class="text_1"/><span class="red ml10"></span></div>
+            <div class="clear"></div>
+        </div>
+        
+      
+             <div class="mt10">
+        	<p class="fl leftName middle"><span>图片地址：</span></p>
+              <div class="fl rightInfo middle"><input type="text" id="tab_dictionaryImgUrl" name="tab_dictionaryImgUrl" value="{$T.m.dictionaryImgUrl}" maxlength="200" class="text_1"/><span class="red ml10"></span></div>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="mt10">
+	        	<p class="fl leftName middle"><span>状态：</span></p>
+	            <div class="fl rightInfo middle">
+	            <input type="radio" id="tab_status" value="1" name="tab_status"  {#if $T.m.status =='1' || $T.m.status == "" }checked {#/if} /><span class="ml5">可用</span>
+	            <input type="radio" id="tab_status" {#if $T.m.status =='2' }checked {#/if} name="tab_status" value="2" /><span class="ml5">不可用</span>
+	            </div>
+	            <div class="clear"></div>
+	        </div>
+      
+        <!-- <div class="mt10">
+        	<p class="fl leftName middle"><span>创建时间：</span></p>
+            <div class="fl rightInfo middle"><input type="text" id="tab_updatetime" name="tab_updatetime" value="{$T.updatetime}" class="text_1" /></div>
+            <div class="clear"></div>
+        </div> 
+       
+        <div class="mt10">
+        	<p class="fl leftName middle"><span>修改时间：</span></p>
+            <div class="fl rightInfo middle"><input type="text" id="tab_updateTime" name="tab_updateTime" value="{$T.updateTime}" class="text_1" /></div>
+            <div class="clear"></div>
+        </div>     
+      -->
+    </div>
+    </textarea>
+</div>
+</body>
+<input type="hidden" id="pageNo"   name="pageNo"  value="1" />
+<div id="Pagination">
+</div>
+</html>
+
